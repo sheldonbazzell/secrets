@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action="/sessions" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="text" name="login_user[email]" placeholder="Email" />
+		<input type="text" name="login_user[password]" placeholder="Password" />
+		<input type="submit" value="Log In" />
+	</form>
+	<a href="/users/new">Not Registered?</a>
+</body>
+</html>

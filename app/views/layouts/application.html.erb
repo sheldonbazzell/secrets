@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secrets</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller.controller_name %>">
+	<%= content_tag :header, "Secrets" %>
+	<% if flash[:reg_errors] %>
+		<% flash.each do |key, value| %>
+			<%= content_tag :p, value, class: :error %>
+		<% end %>
+	<% end %>
+	<% if flash[:login_errors] %>
+		<p class="error"><%= flash[:login_errors] %></p>
+	<% end %>
+<%= yield %>
+
+</body>
+</html>

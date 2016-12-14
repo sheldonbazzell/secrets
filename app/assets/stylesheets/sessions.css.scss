@@ -1,0 +1,21 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.sessions {
+	padding: 20px;
+	header { 
+		font-weight: bold;
+		font-size: 30px;
+		margin-bottom: 20px; 
+	}
+	.error { 
+		color: red;
+	}
+
+	form { margin-bottom: 20px; }
+	input { 
+		margin-bottom: 10px;
+		display: block;
+	}
+}

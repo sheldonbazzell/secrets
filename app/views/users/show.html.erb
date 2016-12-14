@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#new-secret").submit(function(){
+				$.post(
+					$(this).attr('action'),
+					$(this).serialize(),
+					function(secret){
+						console.log(secret);
+						var str = '';
+						var likes = 0;
+						str += "<div><p>" + secret.content + "</p>";
+						str += "<p>" + likes + " likes</p>";
+						str += "<form action='/secrets/" + secret.id + "method='post'>";
+						str += "<input type='hidden' name='authenticity_token' value='";
+						str += "<%=form_authenticity_token%>' /><input type='hidden'";
+						str += "name='_method' value='delete' />";
+						str += "<input type='submit' value='Delete'></form></div>";
+						$('.secrets').append(str);
+					},
+					"json"
+				);
+				return false;
+			});
+		});
+	</script>
+</head>
+<body>
+	<h3>Hi, <%= @user.name %>!</h3>
+	<a href="/secrets">Secrets Feed</a>
+	<a href="/users/<%= @user.id %>/edit">Update Profile</a>
+	<form action="/users" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+		<input type="hidden" name="_method" value="delete">
+		<input type="submit" value="Delete Profile">
+	</form>
+	<form action="/sessions" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+		<input type="hidden" name="_method" value="delete" />
+		<input type="submit" value="Logout">
+	</form>
+	<form id="new-secret" action="/secrets" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+		<textarea placeholder="New Secret" name="secret[content]"></textarea>
+		<input type="submit" value="Create Secret">
+	</form>
+	<% @user.secrets.each do |secret| %>
+		<div class="secrets"></div>
+	<% end %>
+</body>
+</html>
