@@ -15,7 +15,6 @@ class SecretsController < ApplicationController
   	end
     data = @secret
     render json: data
-  	# redirect_to "/users/#{current_user.id}"
   end
 
   def destroy
